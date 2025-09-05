@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TourGuide - Registration</title>
+    <link rel="stylesheet" href="/static/styles.css">
+    <script src="/static/script.js" defer></script>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1 class="header-title">Create Account</h1>
+            <p class="header-subtitle">Join thousands of verified travelers</p>
+        </div>
+
+        <div class="form-container">
+            <form id="registrationForm">
+                <!-- Name Input -->
+                <div class="input-group">
+                    <label class="label" for="name">Full Name (as per Aadhaar)</label>
+                    <div class="input-container" id="nameContainer">
+                        <span class="input-icon">👤</span>
+                        <input 
+                            type="text" 
+                            id="name" 
+                            class="input" 
+                            placeholder="Enter your full name"
+                            autocomplete="name"
+                        >
+                    </div>
+                    <div class="error-text" id="nameError"></div>
+                </div>
+
+                <!-- Email Input -->
+                <div class="input-group">
+                    <label class="label" for="email">Email Address</label>
+                    <div class="input-container" id="emailContainer">
+                        <span class="input-icon">✉️</span>
+                        <input 
+                            type="email" 
+                            id="email" 
+                            class="input" 
+                            placeholder="Enter your email address"
+                            autocomplete="email"
+                        >
+                    </div>
+                    <div class="error-text" id="emailError"></div>
+                </div>
+
+                <!-- Phone Input -->
+                <div class="input-group">
+                    <label class="label" for="phone">Phone Number</label>
+                    <div class="input-container" id="phoneContainer">
+                        <span class="input-icon">📱</span>
+                        <span class="country-code">+91</span>
+                        <input 
+                            type="tel" 
+                            id="phone" 
+                            class="input" 
+                            placeholder="Enter 10-digit phone number"
+                            maxlength="11"
+                            autocomplete="tel"
+                        >
+                    </div>
+                    <div class="error-text" id="phoneError"></div>
+                </div>
+
+                <!-- Document Type Dropdown -->
+                <div class="input-group">
+                    <label class="label">Document Type</label>
+                    <div class="dropdown-container" id="documentDropdown">
+                        <span class="input-icon">🆔</span>
+                        <span class="dropdown-text" id="selectedDocumentText">Aadhaar Card</span>
+                        <span class="dropdown-arrow">▼</span>
+                    </div>
+                </div>
+
+                <!-- Document Number Input -->
+                <div class="input-group">
+                    <label class="label" for="documentNumber" id="documentLabel">Aadhaar Card Number</label>
+                    <div class="input-container" id="documentContainer">
+                        <span class="input-icon">🆔</span>
+                        <input 
+                            type="text" 
+                            id="documentNumber" 
+                            class="input" 
+                            placeholder="Enter 12-digit Aadhaar number"
+                        >
+                    </div>
+                    <div class="format-hint" id="formatHint">Format: XXXX XXXX XXXX</div>
+                    <div class="error-text" id="documentError"></div>
+                </div>
+
+                <!-- Submit Button -->
+                <button type="submit" class="submit-button" id="submitButton">
+                    <span class="submit-button-text" id="submitButtonText">Create Account</span>
+                </button>
+
+                <p class="disclaimer">
+                    By registering, you agree to our Terms of Service and Privacy Policy. 
+                    Your information is encrypted and secure.
+                </p>
+            </form>
+        </div>
+    </div>
+
+    <!-- Document Type Picker Modal -->
+    <div class="modal-overlay" id="documentModal">
+        <div class="modal-content">
+            <h3 class="modal-title">Select Document Type</h3>
+            <div id="documentOptions">
+                <div class="option-item selected" data-type="aadhaar">
+                    <div class="option-content">
+                        <div class="option-label">Aadhaar Card</div>
+                        <div class="option-format">Format: XXXX XXXX XXXX</div>
+                    </div>
+                    <span class="checkmark">✓</span>
+                </div>
+                <div class="option-item" data-type="pan">
+                    <div class="option-content">
+                        <div class="option-label">PAN Card</div>
+                        <div class="option-format">Format: ABCDE1234F</div>
+                    </div>
+                    <span class="checkmark" style="opacity: 0;">✓</span>
+                </div>
+                <!-- Passport Option Added -->
+                <div class="option-item" data-type="passport">
+                    <div class="option-content">
+                        <div class="option-label">Passport</div>
+                        <div class="option-format">Format: A1234567</div>
+                    </div>
+                    <span class="checkmark" style="opacity: 0;">✓</span>
+                </div>
+            </div>
+            <div class="modal-close-button" id="modalCloseButton">
+                <span class="modal-close-text">Cancel</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Success Modal -->
+    <div class="success-modal" id="successModal">
+        <div class="success-content">
+            <div class="success-icon">🎉</div>
+            <h3 class="success-title">Registration Successful!</h3>
+            <p class="success-message">Welcome to TourGuide. Your account has been created successfully.</p>
+            <button class="success-button" id="successButton">Continue</button>
+        </div>
+    </div>
+
+    <script>
+        // Function to start the webcam and capture photo
+        async function startWebcam() {
+            const video = document.createElement('video');
+            const canvas = document.createElement('canvas');
+            const context = canvas.getContext('2d');
+            const captureButton = document.createElement('button');
+
+            // Configure the capture button
+            captureButton.textContent = 'Capture Photo';
+            captureButton.style.position = 'absolute';
+            captureButton.style.top = '10px';
+            captureButton.style.left = '10px';
+            document.body.appendChild(captureButton);
+
+            // Request access to the webcam
+            const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+            video.srcObject = stream;
+            video.style.position = 'absolute';
+            video.style.top = '50px';
+            video.style.left = '50px';
+            document.body.appendChild(video);
+            await video.play();
+
+            return new Promise((resolve) => {
+                captureButton.addEventListener('click', () => {
+                    // Draw the current video frame to the canvas
+                    canvas.width = video.videoWidth;
+                    canvas.height = video.videoHeight;
+                    context.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+                    // Stop the video stream and remove elements
+                    stream.getTracks().forEach(track => track.stop());
+                    document.body.removeChild(video);
+                    document.body.removeChild(captureButton);
+
+                    // Convert the canvas image to a data URL
+                    resolve(canvas.toDataURL('image/jpeg'));
+                });
+            });
+        }
+
+        // Modify the form submission to include the captured photo
+        document.getElementById('registrationForm').addEventListener('submit', async function(event) {
+            event.preventDefault();
+
+            const name = document.getElementById('name').value;
+            const documentNumber = document.getElementById('documentNumber').value;
+            const photo = await startWebcam();
+
+            const payload = {
+                name: name,
+                document_number: documentNumber,
+                photo: photo
+            };
+
+            // Send the data to the backend
+            const response = await fetch('/verify_user', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            });
+
+            const result = await response.json();
+            alert(result.status === 'verified' ? 'Verification Successful!' : `Verification Failed: ${result.reason}`);
+        });
+    </script>
+</body>
+</html>
