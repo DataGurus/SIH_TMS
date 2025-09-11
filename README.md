@@ -75,8 +75,16 @@ Follow these steps to run the project locally.
 # Clone repository
 git clone https://github.com/your-username/smart-tourist-safety.git
 
+# Navigate to frontend folder
 cd frontend
 
+# Build Docker Image
+docker build -t tad-dashboard .
+
+# Run Docker Image with Port Mapping 
+docker run -it \
+-p 8081:80/tcp \
+tad-dashboard
 
 ```
 ## Using Npm
