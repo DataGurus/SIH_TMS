@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>FastAPI Route Tester</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 2em; }
+        label { display: block; margin-top: 1em; }
+        textarea, input, select { width: 100%; margin-top: 0.5em; }
+        button { margin-top: 1em; }
+        pre { background: #f4f4f4; padding: 1em; border-radius: 5px; }
+    </style>
+</head>
+<body>
+    <h1>FastAPI Route Tester</h1>
+    <div>
+        <h2>Health Check</h2>
+        <button onclick="testHealth()">GET /health</button>
+        <pre id="healthResult"></pre>
+    </div>
+    <div>
+        <h2>Create Alert</h2>
+        <form id="alertForm">
+            <label>Title: <input name="title" required></label>
+            <label>Type: <input name="type" value="crime" required></label>
+            <label>Latitude: <input name="lat" type="number" step="any" required></label>
+            <label>Longitude: <input name="lon" type="number" step="any" required></label>
+            <label>Radius (m): <input name="radius_m" type="number" value="1000"></label>
+            <label>Severity: <select name="severity"><option>low</option><option>medium</option><option>high</option></select></label>
+            <label>Message: <input name="message"></label>
+            <label>Expires At (ISO): <input name="expires_at" type="datetime-local"></label>
+            <button type="submit">POST /admin/alerts</button>
+        </form>
+        <pre id="alertResult"></pre>
+    </div>
+    <div>
+        <h2>Nearby Alerts</h2>
+        <form id="nearbyForm">
+            <label>Latitude: <input name="lat" type="number" step="any" required></label>
+            <label>Longitude: <input name="lon" type="number" step="any" required></label>
+            <label>Radius (m): <input name="radius_m" type="number" value="2000"></label>
+            <button type="submit">GET /alerts/nearby</button>
+        </form>
+        <pre id="nearbyResult"></pre>
+    </div>
+    <div>
+        <h2>Ingest News</h2>
+        <form id="newsForm">
+            <label>Title: <input name="title" required></label>
+            <label>Text: <textarea name="text" required></textarea></label>
+            <label>Latitude: <input name="lat" type="number" step="any"></label>
+            <label>Longitude: <input name="lon" type="number" step="any"></label>
+            <button type="submit">POST /news/ingest</button>
+        </form>
+        <pre id="newsResult"></pre>
+    </div>
+    <div>
+        <h2>Weather Check</h2>
+        <form id="weatherForm">
+            <label>Latitude: <input name="lat" type="number" step="any" required></label>
+            <label>Longitude: <input name="lon" type="number" step="any" required></label>
+            <button type="submit">POST /weather/check</button>
+        </form>
+        <pre id="weatherResult"></pre>
+    </div>
+    <script>
+        const apiBase = "http://localhost:8000";
+
+        function showResult(id, data) {
+            document.getElementById(id).textContent = JSON.stringify(data, null, 2);
+        }
+
+        function testHealth() {
+            fetch(apiBase + "/health").then(r => r.json()).then(d => showResult('healthResult', d));
+        }
+
+        document.getElementById('alertForm').onsubmit = function(e) {
+            e.preventDefault();
+            const f = e.target;
+            const payload = {
+                title: f.title.value,
+                type: f.type.value,
+                lat: parseFloat(f.lat.value),
+                lon: parseFloat(f.lon.value),
+                radius_m: parseInt(f.radius_m.value),
+                severity: f.severity.value,
+                message: f.message.value,
+                expires_at: f.expires_at.value ? new Date(f.expires_at.value).toISOString() : null
+            };
+            fetch(apiBase + "/admin/alerts", {
+                method: "POST",
+                headers: {"Content-Type": "application/json"},
+                body: JSON.stringify(payload)
+            }).then(r => r.json()).then(d => showResult('alertResult', d));
+        };
+
+        document.getElementById('nearbyForm').onsubmit = function(e) {
+            e.preventDefault();
+            const f = e.target;
+            const params = new URLSearchParams({
+                lat: f.lat.value,
+                lon: f.lon.value,
+                radius_m: f.radius_m.value
+            });
+            fetch(apiBase + "/alerts/nearby?" + params).then(r => r.json()).then(d => showResult('nearbyResult', d));
+        };
+
+        document.getElementById('newsForm').onsubmit = function(e) {
+            e.preventDefault();
+            const f = e.target;
+            const payload = {
+                title: f.title.value,
+                text: f.text.value,
+                lat: f.lat.value ? parseFloat(f.lat.value) : null,
+                lon: f.lon.value ? parseFloat(f.lon.value) : null
+            };
+            fetch(apiBase + "/news/ingest", {
+                method: "POST",
+                headers: {"Content-Type": "application/json"},
+                body: JSON.stringify(payload)
+            }).then(r => r.json()).then(d => showResult('newsResult', d));
+        };
+
+        document.getElementById('weatherForm').onsubmit = function(e) {
+            e.preventDefault();
+            const f = e.target;
+            const payload = {
+                lat: parseFloat(f.lat.value),
+                lon: parseFloat(f.lon.value)
+            };
+            fetch(apiBase + "/weather/check", {
+                method: "POST",
+                headers: {"Content-Type": "application/json"},
+                body: JSON.stringify(payload)
+            }).then(r => r.json()).then(d => showResult('weatherResult', d));
+        };
+    </script>
+</body>
+</html>

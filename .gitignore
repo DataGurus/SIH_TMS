@@ -6,3 +6,5 @@ itanagar_crime_dataset.csv
 __pycache__/
 .env
 app1.py
+alerts.db
+combinations_with_llm_solutions.csv
