@@ -10,7 +10,7 @@ mp_face_mesh = mp.solutions.face_mesh
 face_mesh = mp_face_mesh.FaceMesh(static_image_mode=True, max_num_faces=1, refine_landmarks=True)
 
 # Path to your photos
-photo_dir = "/home/piyush/Desktop/SIH_TMS/photos"
+photo_dir = "/media/piyuwin/StorageHDD/SIH_TMS/photos"
 photos = {
     "USR001": "PP.jpeg",
     "USR002": "Yashu.jpeg",
