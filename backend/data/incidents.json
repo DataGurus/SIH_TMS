@@ -1,0 +1,92 @@
+[
+  {
+    "id": "inc-1111-2222-3333-444455556666",
+    "type": "Medical",
+    "priority": "High",
+    "touristId": "tourist-z9y8-x7w6-v5u4",
+    "dateIssued": "2025-09-19T14:10:22Z",
+    "location": "Juhu Beach",
+    "status": "In Progress"
+  },
+  {
+    "id": "inc-5555-6666-7777-888899990000",
+    "type": "Theft",
+    "priority": "Medium",
+    "touristId": "tourist-a1b2-c3d4-e5f6",
+    "dateIssued": "2025-09-19T13:45:10Z",
+    "location": "Gateway of India",
+    "status": "Open"
+  },
+  {
+    "id": "inc-9999-0000-1111-222233334444",
+    "type": "Lost Person",
+    "priority": "High",
+    "touristId": "tourist-m5n6-o7p8-q9r0",
+    "dateIssued": "2025-09-18T20:05:00Z",
+    "location": "Siddhivinayak Temple",
+    "status": "Resolved"
+  },
+  {
+    "id": "inc-aaaa-bbbb-cccc-ddddeeeeffff",
+    "type": "Medical",
+    "priority": "High",
+    "touristId": "tourist-f8g7-h6i5-j4k3",
+    "dateIssued": "2025-09-19T19:55:18Z",
+    "location": "Shivaji Park",
+    "status": "Open"
+  },
+  {
+    "id": "inc-abab-cdcd-efef-121212121212",
+    "type": "Disturbance",
+    "priority": "Low",
+    "touristId": "tourist-p0o9-i8u7-y6t5",
+    "dateIssued": "2025-09-19T20:02:45Z",
+    "location": "Bandra Bandstand",
+    "status": "Open"
+  },
+  {
+    "id": "inc-cdcd-efef-abab-343434343434",
+    "type": "Suspicious Activity",
+    "priority": "Medium",
+    "touristId": "tourist-r4e3-w2q1-s5d6",
+    "dateIssued": "2025-09-19T18:30:00Z",
+    "location": "Colaba Causeway",
+    "status": "In Progress"
+  },
+  {
+    "id": "inc-efef-abab-cdcd-565656565656",
+    "type": "Harassment",
+    "priority": "High",
+    "touristId": "tourist-f7g8-h9j0-k1l2",
+    "dateIssued": "2025-09-19T17:15:30Z",
+    "location": "Linking Road Market",
+    "status": "Closed"
+  },
+  {
+    "id": "inc-1a1a-2b2b-3c3c-4d4d4d4d4d4d",
+    "type": "Lost Item",
+    "priority": "Low",
+    "touristId": "tourist-z1x2-c3v4-b5n6",
+    "dateIssued": "2025-09-19T16:00:00Z",
+    "location": "Haji Ali Dargah",
+    "status": "Resolved"
+  },
+  {
+    "id": "inc-5e5e-6f6f-7a7a-8b8b8b8b8b8b",
+    "type": "Theft",
+    "priority": "Medium",
+    "touristId": "tourist-m7n8-b9v0-c1x2",
+    "dateIssued": "2025-09-19T20:10:05Z",
+    "location": "CSMT Station",
+    "status": "Open"
+  },
+  {
+    "id": "inc-9c9c-8d8d-7e7e-6f6f6f6f6f6f",
+    "type": "Medical",
+    "priority": "Low",
+    "touristId": "tourist-q1w2-e3r4-t5y6",
+    "dateIssued": "2025-09-17T11:20:00Z",
+    "location": "Elephanta Caves",
+    "status": "Closed"
+  }
+]

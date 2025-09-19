@@ -1,0 +1,72 @@
+[
+  {
+    "id": "unit-a1b2-c3d4-e5f6-1234567890ab",
+    "type": "Police Car",
+    "location": {"lat": 19.0760, "lng": 72.8777},
+    "status": "Responding",
+    "incident": "inc-1111-2222-3333-444455556666"
+  },
+  {
+    "id": "unit-b2c3-d4e5-f6a1-234567890abc",
+    "type": "Ambulance",
+    "location": {"lat": 18.9220, "lng": 72.8347},
+    "status": "Available",
+    "incident": null
+  },
+  {
+    "id": "unit-c3d4-e5f6-a1b2-34567890abcd",
+    "type": "Security Guard",
+    "location": {"lat": 18.9432, "lng": 72.8242},
+    "status": "On-site",
+    "incident": "inc-5555-6666-7777-888899990000"
+  },
+  {
+    "id": "unit-d4e5-f6a1-b2c3-4567890abcde",
+    "type": "Police Car",
+    "location": {"lat": 19.1197, "lng": 72.8464},
+    "status": "Available",
+    "incident": null
+  },
+  {
+    "id": "unit-e5f6-a1b2-c3d4-567890abcdef",
+    "type": "Patrol Bike",
+    "location": {"lat": 19.0213, "lng": 72.8424},
+    "status": "Patrolling",
+    "incident": null
+  },
+  {
+    "id": "unit-f6a1-b2c3-d4e5-67890abcdeff",
+    "type": "Ambulance",
+    "location": {"lat": 19.0441, "lng": 72.8205},
+    "status": "On-site",
+    "incident": "inc-aaaa-bbbb-cccc-ddddeeeeffff"
+  },
+  {
+    "id": "unit-a1a1-b2b2-c3c3-d4d4d4d4d4d4",
+    "type": "Drone Unit",
+    "location": {"lat": 18.9270, "lng": 72.8300},
+    "status": "Monitoring",
+    "incident": null
+  },
+  {
+    "id": "unit-b2b2-c3c3-d4d4-e5e5e5e5e5e5",
+    "type": "Security Guard",
+    "location": {"lat": 18.9647, "lng": 72.8215},
+    "status": "Available",
+    "incident": null
+  },
+  {
+    "id": "unit-c3c3-d4d4-e5e5-f6f6f6f6f6f6",
+    "type": "Police Car",
+    "location": {"lat": 19.2288, "lng": 72.8540},
+    "status": "Returning to base",
+    "incident": "inc-9999-0000-1111-222233334444"
+  },
+  {
+    "id": "unit-d4d4-e5e5-f6f6-a1a1a1a1a1a1",
+    "type": "Patrol Bike",
+    "location": {"lat": 19.0543, "lng": 72.8433},
+    "status": "Responding",
+    "incident": "inc-abab-cdcd-efef-121212121212"
+  }
+]

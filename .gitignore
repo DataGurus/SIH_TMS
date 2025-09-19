@@ -1,0 +1,46 @@
+# ============================
+# Global ignores
+# ============================
+node_modules/
+*.log
+.env
+.DS_Store
+Thumbs.db
+
+# ============================
+# Backend (Python)
+# ============================
+backend/__pycache__/
+backend/*.pyc
+backend/*.pyo
+backend/.venv/
+backend/env/
+backend/venv/
+backend/.mypy_cache/
+backend/.pytest_cache/
+backend/.coverage
+backend/.idea/
+backend/.vscode/
+
+# ============================
+# Frontend (React)
+# ============================
+frontend/node_modules/
+frontend/.next/
+frontend/dist/
+frontend/build/
+frontend/.cache/
+frontend/.env.local
+frontend/.env.development.local
+frontend/.env.test.local
+frontend/.env.production.local
+
+# ============================
+# System / Editor files
+# ============================
+*.swp
+*.swo
+*.bak
+*.tmp
+.vscode/
+.idea/

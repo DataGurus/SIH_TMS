@@ -1,0 +1,72 @@
+[
+  {
+    "id": "zone-safe-001",
+    "name": "Tourist Safe Zone",
+    "type": "Safe Zone",
+    "color": "green",
+    "coords": [[{"lat": 18.9200, "lng": 72.8320}, {"lat": 18.9250, "lng": 72.8390}, {"lat": 18.9180, "lng": 72.8330}]]
+  },
+  {
+    "id": "zone-restr-002",
+    "name": "Port Authority Area",
+    "type": "No-Go Zone",
+    "color": "red",
+    "coords": [[{"lat": 19.0100, "lng": 72.8400}, {"lat": 19.0150, "lng": 72.8450}, {"lat": 19.0080, "lng": 72.8420}]]
+  },
+  {
+    "id": "zone-event-003",
+    "name": "Concert Venue",
+    "type": "High Traffic Zone",
+    "color": "orange",
+    "coords": [[{"lat": 19.0625, "lng": 72.8345}, {"lat": 19.0655, "lng": 72.8365}, {"lat": 19.0605, "lng": 72.8365}]]
+  },
+  {
+    "id": "zone-shop-004",
+    "name": "Main Shopping District",
+    "type": "Tourist Hub",
+    "color": "blue",
+    "coords": [[{"lat": 19.0700, "lng": 72.8300}, {"lat": 19.0750, "lng": 72.8350}, {"lat": 19.0680, "lng": 72.8320}]]
+  },
+  {
+    "id": "zone-night-005",
+    "name": "Nightlife Area",
+    "type": "High Traffic Zone",
+    "color": "orange",
+    "coords": [[{"lat": 19.0550, "lng": 72.8280}, {"lat": 19.0590, "lng": 72.8310}, {"lat": 19.0540, "lng": 72.8290}]]
+  },
+  {
+    "id": "zone-trans-006",
+    "name": "Major Transport Hub",
+    "type": "High Traffic Zone",
+    "color": "orange",
+    "coords": [[{"lat": 18.9390, "lng": 72.8340}, {"lat": 18.9430, "lng": 72.8380}, {"lat": 18.9380, "lng": 72.8350}]]
+  },
+  {
+    "id": "zone-quiet-007",
+    "name": "Quiet Zone",
+    "type": "Safe Zone",
+    "color": "green",
+    "coords": [[{"lat": 18.9600, "lng": 72.8200}, {"lat": 18.9650, "lng": 72.8250}, {"lat": 18.9580, "lng": 72.8220}]]
+  },
+  {
+    "id": "zone-indust-008",
+    "name": "Industrial Area",
+    "type": "No-Go Zone",
+    "color": "red",
+    "coords": [[{"lat": 19.1250, "lng": 72.9050}, {"lat": 19.1350, "lng": 72.9150}, {"lat": 19.1200, "lng": 72.9100}]]
+  },
+  {
+    "id": "zone-heritage-009",
+    "name": "Heritage Site Area",
+    "type": "Tourist Hub",
+    "color": "blue",
+    "coords": [[{"lat": 18.9550, "lng": 72.8280}, {"lat": 18.9590, "lng": 72.8320}, {"lat": 18.9540, "lng": 72.8290}]]
+  },
+  {
+    "id": "zone- embassy-010",
+    "name": "Embassy Row",
+    "type": "Sensitive Area",
+    "color": "red",
+    "coords": [[{"lat": 18.9750, "lng": 72.8150}, {"lat": 18.9800, "lng": 72.8200}, {"lat": 18.9730, "lng": 72.8170}]]
+  }
+]

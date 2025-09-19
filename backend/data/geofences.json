@@ -1,0 +1,62 @@
+[
+  {
+    "id": "geo-f1e2-d3c4-b5a6",
+    "zoneId": "zone-safe-001",
+    "name": "Marine Drive Promenade",
+    "coords": [[{"lat": 18.9437, "lng": 72.8245}, {"lat": 18.9445, "lng": 72.8250}, {"lat": 18.9440, "lng": 72.8255}]]
+  },
+  {
+    "id": "geo-a1b2-c3d4-e5f6",
+    "zoneId": "zone-restr-002",
+    "name": "Coastal Restricted Area",
+    "coords": [[{"lat": 18.9180, "lng": 72.8160}, {"lat": 18.9200, "lng": 72.8165}, {"lat": 18.9175, "lng": 72.8170}]]
+  },
+  {
+    "id": "geo-1122-3344-5566",
+    "zoneId": "zone-shop-004",
+    "name": "Colaba Causeway Market",
+    "coords": [[{"lat": 18.9213, "lng": 72.8315}, {"lat": 18.9225, "lng": 72.8325}, {"lat": 18.9218, "lng": 72.8330}]]
+  },
+  {
+    "id": "geo-2233-4455-6677",
+    "zoneId": "zone-event-003",
+    "name": "Juhu Beach Event Space",
+    "coords": [[{"lat": 19.0880, "lng": 72.8265}, {"lat": 19.0890, "lng": 72.8270}, {"lat": 19.0885, "lng": 72.8275}]]
+  },
+  {
+    "id": "geo-3344-5566-7788",
+    "zoneId": "zone-night-005",
+    "name": "Bandra West Nightclub Area",
+    "coords": [[{"lat": 19.0560, "lng": 72.8290}, {"lat": 19.0570, "lng": 72.8300}, {"lat": 19.0565, "lng": 72.8305}]]
+  },
+  {
+    "id": "geo-4455-6677-8899",
+    "zoneId": "zone-restr-002",
+    "name": "Naval Dockyard Perimeter",
+    "coords": [[{"lat": 18.9280, "lng": 72.8400}, {"lat": 18.9300, "lng": 72.8410}, {"lat": 18.9285, "lng": 72.8415}]]
+  },
+  {
+    "id": "geo-5566-7788-9900",
+    "zoneId": "zone-trans-006",
+    "name": "CSMT Station Entrance",
+    "coords": [[{"lat": 18.9400, "lng": 72.8355}, {"lat": 18.9410, "lng": 72.8360}, {"lat": 18.9405, "lng": 72.8365}]]
+  },
+  {
+    "id": "geo-6677-8899-0011",
+    "zoneId": "zone-safe-001",
+    "name": "Gateway of India Plaza",
+    "coords": [[{"lat": 18.9218, "lng": 72.8347}, {"lat": 18.9225, "lng": 72.8352}, {"lat": 18.9220, "lng": 72.8357}]]
+  },
+  {
+    "id": "geo-7788-9900-1122",
+    "zoneId": "zone-quiet-007",
+    "name": "Sanjay Gandhi National Park Entrance",
+    "coords": [[{"lat": 19.2150, "lng": 72.8640}, {"lat": 19.2160, "lng": 72.8645}, {"lat": 19.2155, "lng": 72.8650}]]
+  },
+  {
+    "id": "geo-8899-0011-2233",
+    "zoneId": "zone-indust-008",
+    "name": "Industrial Zone Boundary",
+    "coords": [[{"lat": 19.1300, "lng": 72.9100}, {"lat": 19.1320, "lng": 72.9120}, {"lat": 19.1310, "lng": 72.9130}]]
+  }
+]
