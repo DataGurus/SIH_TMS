@@ -1,0 +1,41 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Environment
+.env
+venv/
+ENV/
+
+# VS Code
+.vscode/
+
+# Docker
+*.log
+docker-compose.override.yml
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Others
+*.sqlite3
+*.db
+*.bak
+*.swp
+*.swo
+
+# Ignore local data
+*.local
+
+# Ignore test output
+htmlcov/
+.coverage
+coverage.xml
+
+# Ignore build
+build/
+dist/
+*.egg-info/

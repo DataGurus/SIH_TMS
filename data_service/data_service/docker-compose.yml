@@ -1,0 +1,33 @@
+version: '3.8'
+
+services:
+  # The FastAPI Application Service
+  api:
+    build: .
+    ports:
+      - "8000:8000"
+    env_file:
+      - .env
+    volumes:
+      # This is the critical fix:
+      # It mounts your local blockchain folder into the container,
+      # so the API can access brownie-config.yaml and the contract ABI.
+      - ../blockchain:/app/blockchain
+    depends_on:
+      - db
+
+  # The PostgreSQL Database Service
+  db:
+    image: postgres:13
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    environment:
+      - POSTGRES_DB=${POSTGRES_DB}
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+    ports:
+      - "5432:5432"
+
+volumes:
+  postgres_data:
+
