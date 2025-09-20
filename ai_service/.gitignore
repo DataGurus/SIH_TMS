@@ -82,6 +82,7 @@ env/
 ENV/
 .venv/
 venv.bak/
+sih/ 
 
 # VS Code
 .vscode/

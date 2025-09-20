@@ -8,6 +8,12 @@ from concurrent.futures import ThreadPoolExecutor
 from fastapi import FastAPI, HTTPException, BackgroundTasks, UploadFile, File, Form
 from pydantic import BaseModel, Field
 from starlette.responses import StreamingResponse
+from fastapi.responses import HTMLResponse, JSONResponse
+import numpy as np
+import cv2
+import base64
+import requests
+import mediapipe as mp
 
 # Redis Imports (Modern)
 import redis
@@ -29,9 +35,10 @@ from services.efir import service_compile_efir_data
 from services.rag_chatbot import service_get_rag_response
 from services.intent_classifier import service_classify_intent
 from services.voice_processor import service_transcribe_audio_to_english, service_convert_english_to_speech
+from services.face2embed import extract_key_landmarks, calculate_similarity
 
 # ==============================================================================
-# 2. APPLICATION SETUP & DATABASE CONNECTIONS
+# 2. APPLICATION SETUP & DATABASE CONNECTIONS  
 # ==============================================================================
 
 app = FastAPI(
@@ -39,6 +46,8 @@ app = FastAPI(
     description="Implements a high-performance workflow with new chatbot endpoints.",
     version="8.0.0"
 )
+
+VIGILOCKER_URL = "https://vigilocker.onrender.com/verify"
 
 # --- Real Redis Connection ---
 try:
@@ -200,9 +209,91 @@ class ChatResponse(BaseModel):
     response_text: str
     intent: str = "informational" # Default intent
 
+# --- NEW Models for Face Verification ---
+mp_face_mesh = mp.solutions.face_mesh
+face_mesh = mp_face_mesh.FaceMesh(static_image_mode=True, max_num_faces=1, refine_landmarks=True)
+
+class VerifyUserRequest(BaseModel):
+    name: str
+    document_number: str
+    photo: str  # base64 string
+
 # ==============================================================================
 # 6. API ENDPOINTS
 # ==============================================================================
+# --- NEW ENDPOINT FOR FACE VERIFICATION ---
+@app.post("/verify_user")
+async def verify_user(req: VerifyUserRequest):
+    data = req.dict()
+    print("Received data:", {key: value for key, value in data.items() if key != "photo"})
+
+    name = data.get("name")
+    doc_number = data.get("document_number")
+    photo_data = data.get("photo")
+
+    # Decode the photo from base64
+    try:
+        photo_bytes = base64.b64decode(photo_data.split(",")[1])
+        photo_array = np.frombuffer(photo_bytes, dtype=np.uint8)
+        photo = cv2.imdecode(photo_array, cv2.IMREAD_COLOR)
+        print("Decoded photo shape:", photo.shape if photo is not None else "None")
+    except Exception as e:
+        print("Error decoding photo:", str(e))
+        return JSONResponse({"status": "failed", "reason": "Invalid photo input"}, status_code=400)
+
+    if photo is None or photo.size == 0:
+        print("Invalid photo input")
+        return JSONResponse({"status": "failed", "reason": "Invalid photo input"}, status_code=400)
+
+    # Process the image with Mediapipe
+    print("Processing image with Mediapipe...")
+    try:
+        rgb_img = cv2.cvtColor(photo, cv2.COLOR_BGR2RGB)
+        results = face_mesh.process(rgb_img)
+        print("Mediapipe processing completed")
+    except Exception as e:
+        print("Error during Mediapipe processing:", str(e))
+        return JSONResponse({"status": "failed", "reason": "Error during face processing"}, status_code=500)
+
+    if results.multi_face_landmarks:
+        print("Face landmarks detected")
+        landmarks = results.multi_face_landmarks[0]
+        embeddings = extract_key_landmarks(landmarks.landmark)
+        print("Extracted embeddings:", embeddings)
+    else:
+        print("No face landmarks detected")
+        return JSONResponse({"status": "failed", "reason": "No face detected"}, status_code=400)
+
+    # # Optional local similarity check
+    # stored_landmarks = user_landmarks.get("USR001")  # replace dynamically
+    # if stored_landmarks:
+    #     try:
+    #         similarity_score = calculate_similarity(embeddings, stored_landmarks)
+    #         print("Stored landmarks:", stored_landmarks)
+    #         print("Similarity score:", similarity_score)
+    #     except Exception as e:
+    #         print("Error calculating similarity:", str(e))
+
+    # Send data to VigiLocker
+    try:
+        payload = {
+            "name": name,
+            "document_number": doc_number,
+            "embeddings": embeddings
+        }
+        print("Sending payload to VigiLocker:", payload)
+        response = requests.post(VIGILOCKER_URL, json=payload)
+        print("VigiLocker response status:", response.status_code)
+        print("VigiLocker response data:", response.json())
+    except Exception as e:
+        print("Error communicating with VigiLocker:", str(e))
+        return JSONResponse({"status": "failed", "reason": "Error communicating with VigiLocker"}, status_code=500)
+
+    if response.status_code == 200:
+        return response.json()
+    else:
+        return JSONResponse({"status": "failed", "reason": "Verification failed"}, status_code=400)
+
 
 @app.post("/logs/realtime", response_model=LogResponse)
 async def capture_realtime_log(log: RealTimeLog):
